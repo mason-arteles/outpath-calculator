@@ -1,7 +1,7 @@
 # Outpath Build Cost Calculator
 # 
 
-save_file = open("%%appdata%%/../LocalLow/DAVII PROJECTS/Outpath First Journey/SaveFile1.es3") # i might try to load in some stuff from save file directly
+# i might try to load in some stuff from save file directly
 
 properties = {
     "thrift_level": 0
