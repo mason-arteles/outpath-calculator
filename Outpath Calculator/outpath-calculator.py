@@ -29,7 +29,7 @@ structure_costs = {
     "collector": {"stone": 30, "iron_ingot": 6, "brick": 8}
 }
 
-plurals: {
+plurals = {
     "flower": "flowers",
     "copper_ingot": "copper ingots",
     "berry": "berries",
@@ -91,7 +91,7 @@ def get_command_help(command):
 def get_structure_name(structure_name):
     if structure_name.endswith(" x"):
         structure_name = structure_name[:-2]
-    if structure_name.endswith("s")
+    if structure_name.endswith("s"):
         structure_name = structure_name[:-1]
     
     if structure_name == "work_bench":
@@ -107,11 +107,11 @@ def save_config():
 def get_required_resources(structure_name, i_have, count):
     structure_data = structure_costs[structure_name]
     resource_object = {}
-        for [resource, amount] in structure_data: # assuming that count > 0
-            if not resource in resource_object.keys():
-                resource_object[resource] = 0
-            for step in range(i_have, count + i_have):
-                resource_object[resource] += get_required_amount(amount, step)
+    for [resource, amount] in structure_data: # assuming that count > 0
+        if not resource in resource_object.keys():
+            resource_object[resource] = 0
+        for step in range(i_have, count + i_have):
+            resource_object[resource] += get_required_amount(amount, step)
     return resource_object
     
 def get_required_amount(amount, placed):
@@ -126,16 +126,34 @@ input_string = ""
 
 while not input_string == "stop":
     input_string = input("> ").strip().lower()
-    match input_string.split(/[ :=_,]+/):
+    input_string.split(" ")
+    for string in input_string:
+        if ":" in string:
+            input_string.extend(string.split(":"))
+            input_string.remove(string)
+            continue
+        if "=" in string:
+            input_string.extend(string.split("="))
+            input_string.remove(string)
+            continue
+        if "_" in string:
+            input_string.extend(string.split("_"))
+            input_string.remove(string)
+        if "," in string:
+            input_string.extend(string.split(","))
+            input_string.remove(string)
+    while "" in input_string:
+        input_string.remove("")
+    match input_string: # [ :=_,]
         case [('help' | 'syntax' | ('syntax','of')), *command]:
-            get_command_help(command):
+            get_command_help(command)
         case (['get', 'thrift'] | ('thrift')):
             print("Your thrift level is %d", properties.thrift_Level)
         case [(('thrift') | ('set', 'thrift')), level]:
             if not level == properties.thrift_level:
                 properties.thrift_level = level
         case [("cost" | "price") | (("cost" | "price"), "of")]:
-        case [(("cost" | "price") | (("cost" | "price"), "of")), *structure_name]
+        case [(("cost" | "price") | (("cost" | "price"), "of")), *structure_name]:
         case [((('cost' | 'price'), 'of') | ('cost' | 'price')), count, *stucture_name] \
                 if count.isnumeric():
         case [((('cost' | 'price'), 'of') | ('cost' | 'price')), *stucture_name, count] \
@@ -147,8 +165,10 @@ while not input_string == "stop":
         case [((('cost' | 'price'), 'of') | ('cost' | 'price')), *stucture_name, count, i_have] \
                 if count.isnumeric() and i_have.isnumeric():
             
-            if structure_name and len(strcuture_array) > 0:
-                structure_name = structure_name.join("_"):
+            structure_name = structure_name.join(" ")
+
+            if structure_name and len(strcuture_name) > 0:
+                structure_name = structure_name.join("_")
             else:
                 structure_name = input("What structure are you building? > ")
             
@@ -167,7 +187,7 @@ while not input_string == "stop":
             
             required_resources = get_required_resources(structure_name, i_have, count)
             print("You will need:")
-            for [resource, amount] of required_resources:
+            for [resource, amount] in required_resources:
                 print("> %d %s", amount, plurals[resource] if amount > 1 and plurals.keys().contains(resource) else resource.replace("_", " "))
             print()
         case ['stop']:

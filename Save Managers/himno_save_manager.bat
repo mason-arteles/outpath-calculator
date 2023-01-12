@@ -1,7 +1,7 @@
 @ECHO OFF
 SETLOCAL
 
-IF NOT EXIST "%APPDATA%/../LocalLow/DAVII PROJECTS/Outpath" (
+IF NOT EXIST "%APPDATA%/../LocalLow/Breakfast Studio/Himno" (
     ECHO "Wasn't able to locate the game's directory. Have you installed and launched the game yet?"
     EXIT
 )
